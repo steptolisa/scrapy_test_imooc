@@ -16,8 +16,7 @@ class BasicSpider(scrapy.Spider):
 
     def parse(self, response):
 
-        # url 跟进
-        # 获取下一页url信息
+        # get the next index URLs and yield Requests
         next_selector = response.xpath("//a[contains(text(),'下一页')]/@href")
         for url in next_selector.extract():
             yield Request(parse.urljoin(response.url, url))
